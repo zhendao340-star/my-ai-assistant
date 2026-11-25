@@ -17,7 +17,7 @@
 
 ## 🚀 在线体验
 
-直接打开：https://你的应用名.streamlit.app
+直接打开：https://my-ai-assistant-9gyinpbxgebny2uubkedum.streamlit.app/
 
 ## 🛠️ 技术栈
 
