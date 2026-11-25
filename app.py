@@ -14,6 +14,7 @@ import csv                   # 表格工具：写 CSV 文件用，写出来的�
 import requests              # 快递员：帮我们向网上的服务器（比如智谱搜索接口）发请求、收回复
 import streamlit as st       # 界面库：几行代码就能把 Python 变成网页，这次界面的全部靠它
 from openai import OpenAI    # 大模型客户端：智谱兼容 OpenAI 的调用格式，所以借这个库用
+import os                    # 文件操作工具：检查文件是否存在
 
 # 智谱的 API Key：一把钥匙开两扇门——既能调大模型，也能调它家的搜索接口
 API_KEY = st.secrets["API_KEY"]   # 从密钥保险箱里取，不写死在代码里
