@@ -178,6 +178,23 @@ if task:  # 只有真的输入了东西，才开始干活
             status.update(label="干完了", state="complete")  # 面板打个勾、收起来
 
         st.write(final_reply)  # 把最后那句汇报画到页面上
+        if os.path.exists("AI新闻收集表.csv"):
+            # 用 csv 模块读回刚才写好的文件（和 save_table 里用同一个模块，对称）
+            # encoding="utf-8-sig" 也是对称的：写和读都用这个编码，中文才不会乱
+            with open("AI新闻收集表.csv", encoding="utf-8-sig") as f:
+                rows = list(csv.DictReader(f))   # DictReader 会把每一行变成 列名:值 的字典
+
+            st.subheader("📊 收集结果")   # 页面上加一个小标题
+            st.dataframe(rows)             # Streamlit 的表格组件，自动排版，可排序
+
+            # 下载按钮：data 是文件内容（二进制），file_name 是用户下载时的文件名
+            with open("AI新闻收集表.csv", "rb") as f:
+                st.download_button(
+                    label="下载 CSV",           # 按钮上的文字
+                    data=f.read(),              # 文件内容
+                    file_name="AI新闻收集表.csv",
+                    mime="text/csv"             # 告诉浏览器这是表格文件
+                )
 
     # 第 3 步：把汇报也记上黑板，下次任务它还记得前面发生过什么
     st.session_state.history.append({"role": "assistant", "content": final_reply})
